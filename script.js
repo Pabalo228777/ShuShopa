@@ -18,6 +18,12 @@ async function searchWiki() {
 
     resultsDiv.innerHTML = "";
 
+    if (data.query.search.length === 0) {
+        resultsDiv.innerHTML = `<p style="color:#aaa; text-align:center; margin-top:30px;">По запросу «${query}» ничего не найдено.</p>`;
+        return;
+    }
+
+
     data.query.search.forEach(article => {
 
         resultsDiv.innerHTML += `
@@ -28,6 +34,9 @@ async function searchWiki() {
                 <p>${article.snippet}</p>
 
             </div>
-        `;
+        
+            
+
+            `;
     });
 }
