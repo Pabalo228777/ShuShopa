@@ -4,34 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudentSearch</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="container">
-
         <h1 class="logo">StudentSearch</h1>
-
         <div class="search-box">
-            <input 
-                type="text" 
-                id="searchInput"
-                placeholder="Search Wikipedia..."
-            >
-
-            <button onclick="searchWiki()">
-                Search
-            </button>
+            <div class="input-wrap">
+                <input 
+                    type="text" 
+                    id="searchInput"
+                    placeholder="Search Wikipedia..."
+                >
+                <button class="clear-btn" onclick="clearSearch()">✕</button>
+            </div>
+            <button onclick="searchWiki()">Search</button>
         </div>
-
         <div id="results"></div>
-
-        <a href="777"></a>
-
     </div>
-
     <script src="script.js"></script>
-
 </body>
 </html>
