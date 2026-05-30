@@ -103,3 +103,7 @@ body {
     cursor: pointer;
     line-height: 1;
 }
+a.result-card {
+    display: block;
+    text-decoration: none;
+}

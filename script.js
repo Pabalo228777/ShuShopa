@@ -23,20 +23,15 @@ async function searchWiki() {
         return;
     }
     data.query.search.forEach(article => {
-
-        resultsDiv.innerHTML += `
-            <div class="result-card">
-
-                <h2>${article.title}</h2>
-
-                <p>${article.snippet}</p>
-
-            </div>
-        
-            
-
-            `;
-    });
+    const url = `https://en.wikipedia.org/wiki/${encodeURIComponent(article.title)}`;
+    
+    resultsDiv.innerHTML += `
+        <a class="result-card" href="${url}" target="_blank">
+            <h2>${article.title}</h2>
+            <p>${article.snippet}</p>
+        </a>
+    `;
+});
 }
 
 function clearSearch() {
