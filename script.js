@@ -22,8 +22,6 @@ async function searchWiki() {
         resultsDiv.innerHTML = `<p style="color:#aaa; text-align:center; margin-top:30px;">По запросу «${query}» ничего не найдено.</p>`;
         return;
     }
-
-
     data.query.search.forEach(article => {
 
         resultsDiv.innerHTML += `
@@ -39,4 +37,9 @@ async function searchWiki() {
 
             `;
     });
+}
+
+function clearSearch() {
+    document.getElementById("searchInput").value = "";
+    document.getElementById("results").innerHTML = "";
 }

@@ -85,3 +85,21 @@ body {
 .result-card p {
     color: #cccccc;
 }
+
+.input-wrap {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.clear-btn {
+    position: absolute;
+    right:0;
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 18px;
+    cursor: pointer;
+    line-height: 1;
+}
