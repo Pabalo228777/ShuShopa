@@ -107,3 +107,38 @@ a.result-card {
     display: block;
     text-decoration: none;
 }
+.history-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #1d1d1d;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.history-modal {
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background: #1d1d1d;
+    border-radius: 10px;
+    padding: 20px;
+    min-width: 200px;
+    z-index: 100;
+}
+
+.history-modal h3 {
+    margin-bottom: 12px;
+    color: white;
+    font-size: 15px;
+}
+#history {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
