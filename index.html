@@ -1,35 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="StudentSearch — поиск по Wikipedia">
     <title>StudentSearch</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="logo">StudentSearch</h1>
-        <div class="search-box">
-            <div class="input-wrap">
-                <input 
-                    type="text" 
-                    id="searchInput"
-                    placeholder="Search Wikipedia..."
-                >
-                <button class="clear-btn" onclick="clearSearch()">✕</button>
-            </div>
-            <button onclick="searchWiki()">Search</button>
-        </div>
-        <div id="results"></div>
+
+    <button class="history-btn" onclick="toggleHistory()" aria-label="История поиска">История</button>
+
+    <div class="history-modal" id="historyModal" role="dialog" aria-label="История поиска">
+        <h3>История поиска</h3>
+        <div id="history"></div>
     </div>
+
+    <main class="container">
+        <h1 class="logo">StudentSearch</h1>
+
+        <div class="search-box" role="search">
+            <div class="input-wrap">
+                <label for="searchInput" class="sr-only">Поисковый запрос</label>
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Поиск по Wikipedia..."
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+                <button class="clear-btn" onclick="clearSearch()" aria-label="Очистить поиск">✕</button>
+            </div>
+            <button onclick="searchWiki()" aria-label="Найти">Поиск</button>
+        </div>
+
+        <div id="results" aria-live="polite" aria-label="Результаты поиска"></div>
+    </main>
+
     <script src="script.js"></script>
-
-    <button class="history-btn" onclick="toggleHistory()">История</button>
-
-<div class="history-modal" id="historyModal">
-    <h3>История поиска</h3>
-    <div id="history"></div>
-</div>
-
 </body>
 </html>
