@@ -8,9 +8,7 @@
 body {
     background: #0f0f0f;
     color: white;
-
     min-height: 100vh;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,42 +23,33 @@ body {
     text-align: center;
     font-size: 64px;
     margin-bottom: 40px;
-
     color: #ffffff;
 }
 
 .search-box {
     display: flex;
     gap: 10px;
-
     margin-bottom: 40px;
 }
 
 .search-box input {
     flex: 1;
-
     padding: 15px;
     border: none;
     border-radius: 10px;
-
     font-size: 18px;
-
     background: #1d1d1d;
     color: white;
 }
 
 .search-box button {
     padding: 15px 25px;
-
     border: none;
     border-radius: 10px;
-
     background: #ffffff;
     color: black;
-
     font-weight: bold;
     cursor: pointer;
-
     transition: 0.3s;
 }
 
@@ -68,24 +57,64 @@ body {
     transform: scale(1.05);
 }
 
-.result-card {
+/* Карточка результата */
+a.result-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
     background: #1b1b1b;
-
     padding: 20px;
     border-radius: 15px;
+    margin-bottom: 16px;
+    transition: background 0.2s;
+}
 
-    margin-bottom: 20px;
+a.result-card:hover {
+    background: #242424;
+}
+
+.result-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+    background: #2a2a2a;
+}
+
+.result-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: rgba(255,255,255,0.7);
+    user-select: none;
+}
+
+.result-text {
+    flex: 1;
+    min-width: 0;
 }
 
 .result-card h2 {
     color: #00ffd5;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    font-size: 18px;
 }
 
 .result-card p {
     color: #cccccc;
+    font-size: 14px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
+/* Input wrap */
 .input-wrap {
     position: relative;
     flex: 1;
@@ -95,7 +124,7 @@ body {
 
 .clear-btn {
     position: absolute;
-    right:0;
+    right: 0;
     background: none;
     border: none;
     color: #aaa;
@@ -103,7 +132,63 @@ body {
     cursor: pointer;
     line-height: 1;
 }
-a.result-card {
-    display: block;
-    text-decoration: none;
+
+/* История */
+.history-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #1d1d1d;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.history-modal {
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background: #1d1d1d;
+    border-radius: 10px;
+    padding: 20px;
+    min-width: 200px;
+    z-index: 100;
+}
+
+.history-modal h3 {
+    margin-bottom: 12px;
+    color: white;
+    font-size: 15px;
+}
+
+#history {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.history-item {
+    color: #aaa;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px 0;
+}
+
+.history-item:hover {
+    color: #00ffd5;
 }
