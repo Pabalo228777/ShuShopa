@@ -13,28 +13,39 @@
         <h3>История поиска</h3>
         <div id="history"></div>
     </div>
-    <main class="container">
-        <h1 class="logo">StudentSearch</h1>
-        <div class="lang-toggle" role="group" aria-label="Выбор языка Wikipedia">
-            <button id="btnRU" class="lang-btn active" onclick="setLang('ru')">RU</button>
-            <button id="btnEN" class="lang-btn" onclick="setLang('en')">EN</button>
+
+    <div class="layout">
+        <div id="preview-panel" class="preview-panel hidden">
+            <img id="preview-img" src="" alt="" class="preview-img">
+            <h2 id="preview-title"></h2>
+            <p id="preview-excerpt"></p>
+            <a id="preview-link" href="#" target="_blank" rel="noopener noreferrer" class="visit-btn">Посетить страницу</a>
         </div>
-        <div class="search-box" role="search">
-            <div class="input-wrap">
-                <label for="searchInput" class="sr-only">Поисковый запрос</label>
-                <input
-                    type="search"
-                    id="searchInput"
-                    placeholder="Поиск по Wikipedia..."
-                    autocomplete="off"
-                    spellcheck="false"
-                >
-                <button class="clear-btn" onclick="clearSearch()" aria-label="Очистить поиск">✕</button>
+
+        <main class="container">
+            <h1 class="logo">StudentSearch</h1>
+            <div class="lang-toggle" role="group" aria-label="Выбор языка Wikipedia">
+                <button id="btnRU" class="lang-btn active" onclick="setLang('ru')">RU</button>
+                <button id="btnEN" class="lang-btn" onclick="setLang('en')">EN</button>
             </div>
-            <button onclick="searchWiki()" aria-label="Найти">Поиск</button>
-        </div>
-        <div id="results" aria-live="polite" aria-label="Результаты поиска"></div>
-    </main>
+            <div class="search-box" role="search">
+                <div class="input-wrap">
+                    <label for="searchInput" class="sr-only">Поисковый запрос</label>
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Поиск по Wikipedia..."
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+                    <button class="clear-btn" onclick="clearSearch()" aria-label="Очистить поиск">✕</button>
+                </div>
+                <button onclick="searchWiki()" aria-label="Найти">Поиск</button>
+            </div>
+            <div id="results" aria-live="polite" aria-label="Результаты поиска"></div>
+        </main>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

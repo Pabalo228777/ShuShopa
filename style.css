@@ -4,7 +4,6 @@
     box-sizing: border-box;
     font-family: Arial;
 }
-
 body {
     background: #0f0f0f;
     color: white;
@@ -14,16 +13,103 @@ body {
     align-items: center;
 }
 
-.container {
-    width: 90%;
-    max-width: 900px;
+.layout {
+    display: flex;
+    gap: 24px;
+    width: 95%;
+    max-width: 1300px;
+    align-items: flex-start;
+    justify-content: center;
 }
 
+/* Панель предпросмотра */
+.preview-panel {
+    width: 280px;
+    flex-shrink: 0;
+    background: #1b1b1b;
+    border-radius: 16px;
+    padding: 20px;
+    position: sticky;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: opacity 0.3s;
+}
+.preview-panel.hidden {
+    display: none;
+}
+.preview-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #2a2a2a;
+}
+.preview-panel h2 {
+    color: #00ffd5;
+    font-size: 16px;
+    line-height: 1.4;
+}
+.preview-panel p {
+    color: #ccc;
+    font-size: 13px;
+    line-height: 1.6;
+}
+.visit-btn {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background: #00ffd5;
+    color: #0f0f0f;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 14px;
+    transition: opacity 0.2s;
+}
+.visit-btn:hover {
+    opacity: 0.85;
+}
+
+.container {
+    flex: 1;
+    max-width: 900px;
+}
 .logo {
     text-align: center;
     font-size: 64px;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
     color: #ffffff;
+}
+
+/* Переключатель языка */
+.lang-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+.lang-btn {
+    padding: 8px 24px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background: transparent;
+    color: #aaa;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+}
+.lang-btn:hover {
+    border-color: #00ffd5;
+    color: #00ffd5;
+}
+.lang-btn.active {
+    background: #00ffd5;
+    border-color: #00ffd5;
+    color: #0f0f0f;
 }
 
 .search-box {
@@ -31,7 +117,6 @@ body {
     gap: 10px;
     margin-bottom: 40px;
 }
-
 .search-box input {
     flex: 1;
     padding: 15px;
@@ -41,7 +126,6 @@ body {
     background: #1d1d1d;
     color: white;
 }
-
 .search-box button {
     padding: 15px 25px;
     border: none;
@@ -52,7 +136,6 @@ body {
     cursor: pointer;
     transition: 0.3s;
 }
-
 .search-box button:hover {
     transform: scale(1.05);
 }
@@ -68,12 +151,14 @@ a.result-card {
     border-radius: 15px;
     margin-bottom: 16px;
     transition: background 0.2s;
+    cursor: pointer;
 }
-
 a.result-card:hover {
     background: #242424;
 }
-
+a.result-card.active {
+    border: 2px solid #00ffd5;
+}
 .result-thumb {
     width: 80px;
     height: 80px;
@@ -82,7 +167,6 @@ a.result-card:hover {
     flex-shrink: 0;
     background: #2a2a2a;
 }
-
 .result-placeholder {
     display: flex;
     align-items: center;
@@ -92,18 +176,15 @@ a.result-card:hover {
     color: rgba(255,255,255,0.7);
     user-select: none;
 }
-
 .result-text {
     flex: 1;
     min-width: 0;
 }
-
 .result-card h2 {
     color: #00ffd5;
     margin-bottom: 8px;
     font-size: 18px;
 }
-
 .result-card p {
     color: #cccccc;
     font-size: 14px;
@@ -114,6 +195,19 @@ a.result-card:hover {
     overflow: hidden;
 }
 
+/* Бейдж языка */
+.result-lang-badge {
+    font-size: 11px;
+    font-weight: bold;
+    color: #0f0f0f;
+    background: #00ffd5;
+    border-radius: 4px;
+    padding: 2px 6px;
+    margin-left: 8px;
+    vertical-align: middle;
+    letter-spacing: 0.5px;
+}
+
 /* Input wrap */
 .input-wrap {
     position: relative;
@@ -121,7 +215,6 @@ a.result-card:hover {
     display: flex;
     align-items: center;
 }
-
 .clear-btn {
     position: absolute;
     right: 0;
@@ -146,7 +239,6 @@ a.result-card:hover {
     cursor: pointer;
     font-size: 14px;
 }
-
 .history-modal {
     display: none;
     position: fixed;
@@ -158,19 +250,16 @@ a.result-card:hover {
     min-width: 200px;
     z-index: 100;
 }
-
 .history-modal h3 {
     margin-bottom: 12px;
     color: white;
     font-size: 15px;
 }
-
 #history {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
-
 .sr-only {
     position: absolute;
     width: 1px;
@@ -181,14 +270,12 @@ a.result-card:hover {
     white-space: nowrap;
     border: 0;
 }
-
 .history-item {
     color: #aaa;
     cursor: pointer;
     font-size: 14px;
     padding: 4px 0;
 }
-
 .history-item:hover {
     color: #00ffd5;
 }
