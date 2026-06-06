@@ -8,10 +8,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button class="history-btn" onclick="toggleHistory()" aria-label="История поиска">История</button>
+    <div class="top-btns">
+        <button class="history-btn" onclick="toggleHistory()" aria-label="История поиска">История</button>
+        <button class="history-btn wallpaper-open-btn" onclick="toggleWallpaper()" aria-label="Обои">🖼 Обои</button>
+    </div>
+
     <div class="history-modal" id="historyModal" role="dialog" aria-label="История поиска">
         <h3>История поиска</h3>
         <div id="history"></div>
+    </div>
+
+    <div class="wallpaper-modal" id="wallpaperModal" role="dialog" aria-label="Выбор обоев">
+        <h3>Обои</h3>
+        <div class="wp-presets">
+            <button class="wp-preset" data-bg="none" title="Без обоев">✕</button>
+            <button class="wp-preset" data-bg="linear-gradient(135deg,#0f2027,#203a43,#2c5364)" title="Тёмный океан"></button>
+            <button class="wp-preset" data-bg="linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)" title="Полночь"></button>
+            <button class="wp-preset" data-bg="linear-gradient(135deg,#0d0d0d,#1a0a2e,#2d0052)" title="Фиолетовая тьма"></button>
+            <button class="wp-preset" data-bg="linear-gradient(135deg,#0a0a0a,#1a1a1a,#2a2a2a)" title="Угольный"></button>
+            <button class="wp-preset" data-bg="linear-gradient(135deg,#001f1f,#003333,#004d4d)" title="Бирюзовая тьма"></button>
+        </div>
+        <label class="wp-upload-label">
+            <input type="file" id="wpFileInput" accept="image/png,image/jpeg,image/webp" style="display:none">
+            <span>Загрузить своё изображение</span>
+        </label>
+        <div class="wp-current" id="wpCurrentLabel">Текущий фон: нет</div>
+        <button class="wp-reset" onclick="resetWallpaper()">Сбросить</button>
     </div>
 
     <div class="layout">
@@ -21,7 +43,6 @@
             <p id="preview-excerpt"></p>
             <a id="preview-link" href="#" target="_blank" rel="noopener noreferrer" class="visit-btn">Посетить страницу</a>
         </div>
-
         <main class="container">
             <h1 class="logo">StudentSearch</h1>
             <div class="lang-toggle" role="group" aria-label="Выбор языка Wikipedia">
@@ -45,7 +66,6 @@
             <div id="results" aria-live="polite" aria-label="Результаты поиска"></div>
         </main>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
