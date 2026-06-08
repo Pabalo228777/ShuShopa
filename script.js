@@ -34,7 +34,7 @@ async function showPreview(title, thumb, snippet, wikiUrl) {
     const excerptEl = document.getElementById('preview-excerpt');
     const link = document.getElementById('preview-link');
 
-    // Получаем первый абзац через API
+    
     const cfg = langConfig[currentLang];
     try {
         const url = `${cfg.apiBase}?action=query&titles=${encodeURIComponent(title)}&prop=extracts&exintro=true&explaintext=true&format=json&origin=*`;
@@ -43,7 +43,7 @@ async function showPreview(title, thumb, snippet, wikiUrl) {
         const pages = data.query.pages;
         const page = pages[Object.keys(pages)[0]];
         const extract = page.extract || snippet;
-        // Берём первый абзац
+        
         const firstParagraph = extract.split('\n').find(p => p.trim().length > 50) || extract;
         excerptEl.textContent = firstParagraph.slice(0, 300) + (firstParagraph.length > 300 ? '...' : '');
     } catch {
@@ -62,7 +62,7 @@ async function showPreview(title, thumb, snippet, wikiUrl) {
 
     panel.classList.remove('hidden');
 
-    // Подсветить активную карточку
+    
     document.querySelectorAll('.result-card').forEach(c => c.classList.remove('active'));
 }
 
@@ -203,3 +203,101 @@ document.getElementById('searchInput').addEventListener('keydown', e => {
 });
 
 document.getElementById('searchInput').placeholder = langConfig[currentLang].placeholder;
+
+
+function toggleWallpaper() {
+    const modal = document.getElementById('wallpaperModal');
+    const historyModal = document.getElementById('historyModal');
+    historyModal.style.display = 'none';
+    modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+}
+
+function applyWallpaper(value, label) {
+    const body = document.body;
+    if (!value || value === 'none') {
+        body.style.background = '#0f0f0f';
+        body.classList.remove('has-wallpaper');
+        document.getElementById('wpCurrentLabel').textContent = 'Текущий фон: нет';
+    } else if (value.startsWith('data:') || value.startsWith('http')) {
+        body.style.background = `url('${value}') center/cover fixed`;
+        body.classList.add('has-wallpaper');
+        document.getElementById('wpCurrentLabel').textContent = `Текущий фон: ${label || 'изображение'}`;
+    } else {
+        body.style.background = value;
+        body.style.backgroundSize = 'cover';
+        body.classList.add('has-wallpaper');
+        document.getElementById('wpCurrentLabel').textContent = `Текущий фон: градиент`;
+    }
+    
+    document.querySelectorAll('.wp-preset').forEach(b => b.classList.remove('active'));
+}
+
+function resetWallpaper() {
+    localStorage.removeItem('wallpaper');
+    localStorage.removeItem('wallpaperLabel');
+    applyWallpaper('none');
+    document.querySelector('.wp-preset[data-bg="none"]').classList.add('active');
+}
+
+function initWallpaperPresets() {
+    
+    document.querySelectorAll('.wp-preset[data-bg]').forEach(btn => {
+        const bg = btn.getAttribute('data-bg');
+        if (bg !== 'none') {
+            btn.style.background = bg;
+        }
+        btn.addEventListener('click', () => {
+            applyWallpaper(bg, btn.title);
+            localStorage.setItem('wallpaper', bg);
+            localStorage.setItem('wallpaperLabel', btn.title);
+            document.querySelectorAll('.wp-preset').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+
+    
+    document.getElementById('wpFileInput').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            const base64 = ev.target.result;
+            try {
+                localStorage.setItem('wallpaper', base64);
+                localStorage.setItem('wallpaperLabel', file.name);
+            } catch {
+                
+                console.warn('localStorage full, wallpaper not saved');
+            }
+            applyWallpaper(base64, file.name);
+        };
+        reader.readAsDataURL(file);
+    });
+
+    
+    const saved = localStorage.getItem('wallpaper');
+    const savedLabel = localStorage.getItem('wallpaperLabel');
+    if (saved) {
+        applyWallpaper(saved, savedLabel);
+        
+        const activeBtn = document.querySelector(`.wp-preset[data-bg="${CSS.escape(saved)}"]`);
+        if (activeBtn) activeBtn.classList.add('active');
+    } else {
+        document.querySelector('.wp-preset[data-bg="none"]').classList.add('active');
+    }
+}
+
+
+document.addEventListener('click', (e) => {
+    const wpModal = document.getElementById('wallpaperModal');
+    const histModal = document.getElementById('historyModal');
+    if (!e.target.closest('.wallpaper-modal') && !e.target.closest('[onclick="toggleWallpaper()"]')) {
+        wpModal.style.display = 'none';
+    }
+    if (!e.target.closest('.history-modal') && !e.target.closest('[onclick="toggleHistory()"]')) {
+        histModal.style.display = 'none';
+    }
+});
+
+
+initWallpaperPresets();
