@@ -2,24 +2,46 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <meta name="description" content="StudentSearch — поиск по Wikipedia">
     <title>StudentSearch</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="top-btns">
-        <button class="history-btn" onclick="toggleHistory()" aria-label="История поиска">История</button>
-        <button class="history-btn wallpaper-open-btn" onclick="toggleWallpaper()" aria-label="Обои">🖼 Обои</button>
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    </div>
+
+    <div class="menu-dropdown" id="menuDropdown">
+        <button onclick="toggleHistory()">📜 История</button>
+        <button onclick="toggleFavorites()">⭐ Избранное</button>
+        <button onclick="toggleWallpaper()">🖼 Обои</button>
     </div>
 
     <div class="history-modal" id="historyModal" role="dialog" aria-label="История поиска">
-        <h3>История поиска</h3>
+        <div class="modal-header">
+            <h3>История поиска</h3>
+            <button class="modal-close" onclick="toggleHistory()">✕</button>
+        </div>
         <div id="history"></div>
     </div>
 
+    <div class="favorites-modal" id="favoritesModal" role="dialog" aria-label="Избранное">
+        <div class="modal-header">
+            <h3>⭐ Избранные статьи</h3>
+            <button class="modal-close" onclick="toggleFavorites()">✕</button>
+        </div>
+        <div id="favoritesList"></div>
+        <div class="favorites-actions">
+            <button class="clear-favorites-btn" onclick="clearAllFavorites()">Очистить всё</button>
+        </div>
+    </div>
+
     <div class="wallpaper-modal" id="wallpaperModal" role="dialog" aria-label="Выбор обоев">
-        <h3>Обои</h3>
+        <div class="modal-header">
+            <h3>Обои</h3>
+            <button class="modal-close" onclick="toggleWallpaper()">✕</button>
+        </div>
         <div class="wp-presets">
             <button class="wp-preset" data-bg="none" title="Без обоев">✕</button>
             <button class="wp-preset" data-bg="linear-gradient(135deg,#0f2027,#203a43,#2c5364)" title="Тёмный океан"></button>
@@ -38,8 +60,11 @@
 
     <div class="layout">
         <div id="preview-panel" class="preview-panel hidden">
+            <div class="preview-header">
+                <h2 id="preview-title"></h2>
+                <button class="favorite-btn" id="favoriteBtn" onclick="toggleCurrentFavorite()">☆</button>
+            </div>
             <img id="preview-img" src="" alt="" class="preview-img">
-            <h2 id="preview-title"></h2>
             <p id="preview-excerpt"></p>
             <a id="preview-link" href="#" target="_blank" rel="noopener noreferrer" class="visit-btn">Посетить страницу</a>
         </div>
@@ -63,6 +88,7 @@
                 </div>
                 <button onclick="searchWiki()" aria-label="Найти">Поиск</button>
             </div>
+            <div id="autocomplete-results" class="autocomplete-results hidden"></div>
             <div id="results" aria-live="polite" aria-label="Результаты поиска"></div>
         </main>
     </div>
